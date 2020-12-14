@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="back">Back</string>
+    <string name="settings">Settings</string>
+    <string name="play">Play</string>
+    <string name="ranking">Ranking</string>
+    <string name="difficult">Choose Difficult</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="random">Random</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="string">%1$s</string>
+    <string name="category">Category</string>
+    <string name="score">%1$.0f</string>
+    <string name="resume_games">Resume</string>
+    <string name="game">Game</string>
+</resources>

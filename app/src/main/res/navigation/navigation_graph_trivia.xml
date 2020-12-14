@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph_trivia"
+    app:startDestination="@id/category2">
+
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.trallerd.quiz.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_category2"
+            app:destination="@id/category2" />
+    </fragment>
+    <fragment
+        android:id="@+id/category2"
+        android:name="com.trallerd.quiz.Category"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_category2_to_game"
+            app:destination="@id/game" />
+    </fragment>
+    <fragment
+        android:id="@+id/ranking2"
+        android:name="com.trallerd.quiz.Ranking"
+        android:label="fragment_ranking"
+        tools:layout="@layout/fragment_ranking" />
+    <fragment
+        android:id="@+id/game"
+        android:name="com.trallerd.quiz.Game"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_game_to_ranking2"
+            app:destination="@id/ranking2" />
+    </fragment>
+</navigation>
