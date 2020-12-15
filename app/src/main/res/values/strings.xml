@@ -21,4 +21,5 @@
     <string name="score">%1$.0f</string>
     <string name="resume_games">Resume</string>
     <string name="game">Game</string>
+    <string name="name">Name</string>
 </resources>

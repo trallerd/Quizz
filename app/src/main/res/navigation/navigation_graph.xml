@@ -6,7 +6,7 @@
     app:startDestination="@id/login">
     <fragment
         android:id="@+id/login"
-        android:name="com.trallerd.quiz.Login"
+        android:name="com.trallerd.quiz.fragments.Login"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/register"
-        android:name="com.trallerd.quiz.Register"
+        android:name="com.trallerd.quiz.fragments.Register"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action

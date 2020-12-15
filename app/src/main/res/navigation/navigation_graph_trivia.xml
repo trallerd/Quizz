@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph_trivia"
-    app:startDestination="@id/category2">
+    app:startDestination="@id/home2">
 
     <fragment
         android:id="@+id/home2"
-        android:name="com.trallerd.quiz.Home"
+        android:name="com.trallerd.quiz.fragments.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/category2"
-        android:name="com.trallerd.quiz.Category"
+        android:name="com.trallerd.quiz.fragments.Category"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" >
         <action
@@ -25,12 +25,12 @@
     </fragment>
     <fragment
         android:id="@+id/ranking2"
-        android:name="com.trallerd.quiz.Ranking"
+        android:name="com.trallerd.quiz.fragments.Ranking"
         android:label="fragment_ranking"
         tools:layout="@layout/fragment_ranking" />
     <fragment
         android:id="@+id/game"
-        android:name="com.trallerd.quiz.Game"
+        android:name="com.trallerd.quiz.fragments.Game"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" >
         <action

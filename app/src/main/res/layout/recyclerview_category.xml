@@ -7,12 +7,12 @@
     android:layout_height="wrap_content"
     android:layout_margin="10sp"
     app:cardBackgroundColor="@android:color/transparent"
-    app:cardCornerRadius="15sp"
-    app:cardElevation="10sp">
+    app:cardElevation="2sp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <TextView
             android:id="@+id/txtCategory"
@@ -22,7 +22,7 @@
             android:padding="15sp"
             android:text="@string/string"
             android:textColor="@color/white"
-            android:textSize="36sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
