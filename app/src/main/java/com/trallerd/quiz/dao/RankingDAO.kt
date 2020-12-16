@@ -1,6 +1,6 @@
 package com.trallerd.quiz.dao
 
-import com.trallerd.quiz.models.RankingResponse
+import com.trallerd.quiz.models.Ranking.RankingResponse
 import com.trallerd.quiz.network.services.RankingService
 import retrofit2.Call
 import retrofit2.Callback

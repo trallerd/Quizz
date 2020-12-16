@@ -1,7 +1,7 @@
 package com.trallerd.quiz.dao
 
 import android.util.Log
-import com.trallerd.quiz.models.CategoriesResponse
+import com.trallerd.quiz.models.Categories.CategoriesResponse
 import com.trallerd.quiz.network.services.CategoriesService
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,7 +20,7 @@ class CategoriesDAO {
 
     fun getCategories(finished : (CategoriesResponse) -> Unit) {
         categoryService.getCategories().enqueue(object : Callback<CategoriesResponse> {
-            override fun onResponse(call : Call<CategoriesResponse> ,response : Response<CategoriesResponse>) {
+            override fun onResponse(call : Call<CategoriesResponse> , response : Response<CategoriesResponse>) {
                 if (response.body() != null) {
                     val categories = response.body()!!
                     finished(categories)

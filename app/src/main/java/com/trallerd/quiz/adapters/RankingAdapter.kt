@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.trallerd.quiz.R
 import com.trallerd.quiz.dao.RankingDAO
-import com.trallerd.quiz.models.Ranking
+import com.trallerd.quiz.models.Ranking.Ranking
 import kotlinx.android.synthetic.main.recyclerview_ranking.view.*
 
 class RankingAdapter(): RecyclerView.Adapter<RankingAdapter.RankingHolder>() {

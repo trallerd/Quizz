@@ -22,4 +22,7 @@
     <string name="resume_games">Resume</string>
     <string name="game">Game</string>
     <string name="name">Name</string>
+    <string name="invalid_user">User doesn\'t exist!!</string>
+    <string name="fields_error">Please complete all fields!!</string>
+    <string name="password_error">Passwords doesn\'t match!!</string>
 </resources>

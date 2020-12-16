@@ -1,4 +1,4 @@
-package com.trallerd.quiz.models
+package com.trallerd.quiz.models.Ranking
 
 class Ranking(
     var user: String,

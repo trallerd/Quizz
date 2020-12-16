@@ -1,4 +1,4 @@
-package com.trallerd.quiz.models
+package com.trallerd.quiz.models.Categories
 
 class Category(
     var name : String

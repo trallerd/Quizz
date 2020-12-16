@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.trallerd.quiz.R
 import com.trallerd.quiz.dao.CategoriesDAO
-import com.trallerd.quiz.models.Category
+import com.trallerd.quiz.models.Categories.Category
 import kotlinx.android.synthetic.main.recyclerview_category.view.*
 
 class CategoryAdapter() : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
