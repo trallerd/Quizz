@@ -1,6 +1,7 @@
 package com.trallerd.quiz.dao
 
-import com.trallerd.quiz.models.Ranking.RankingResponse
+import android.util.Log
+import com.trallerd.quiz.models.ranking.RankingResponse
 import com.trallerd.quiz.network.services.RankingService
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +27,7 @@ class RankingDAO {
             }
 
             override fun onFailure(call : Call<RankingResponse> , t : Throwable) {
-                TODO("Not yet implemented")
+                Log.i("Failure" , t.message.toString())
             }
 
         })

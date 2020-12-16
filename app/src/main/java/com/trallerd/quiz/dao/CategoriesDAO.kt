@@ -1,7 +1,7 @@
 package com.trallerd.quiz.dao
 
 import android.util.Log
-import com.trallerd.quiz.models.Categories.CategoriesResponse
+import com.trallerd.quiz.models.categories.CategoriesResponse
 import com.trallerd.quiz.network.services.CategoriesService
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,7 +27,7 @@ class CategoriesDAO {
                 }
             }
             override fun onFailure(call : Call<CategoriesResponse> , t : Throwable) {
-                Log.i("Cat" , t.message.toString())
+                Log.i("Failure" , t.message.toString())
             }
         })
     }

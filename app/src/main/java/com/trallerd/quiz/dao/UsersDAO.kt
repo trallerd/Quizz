@@ -1,10 +1,10 @@
 package com.trallerd.quiz.dao
 
 import android.util.Log
-import com.trallerd.quiz.models.Login.Login
-import com.trallerd.quiz.models.Login.LoginResponse
-import com.trallerd.quiz.models.Users.User
-import com.trallerd.quiz.models.Users.UsersResponse
+import com.trallerd.quiz.models.login.Login
+import com.trallerd.quiz.models.login.LoginResponse
+import com.trallerd.quiz.models.users.User
+import com.trallerd.quiz.models.users.UsersResponse
 import com.trallerd.quiz.network.services.UsersService
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +30,7 @@ class UsersDAO {
             }
 
             override fun onFailure(call : Call<UsersResponse> , t : Throwable) {
-                TODO("Not yet implemented")
+                Log.i("Failure" , t.message.toString())
             }
 
         })
@@ -49,7 +49,7 @@ class UsersDAO {
             }
 
             override fun onFailure(call : Call<LoginResponse> , t : Throwable) {
-                TODO("Not yet implemented")
+                Log.i("Failure" , t.message.toString())
             }
 
         })

@@ -3,10 +3,11 @@ package com.trallerd.quiz.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.trallerd.quiz.R
 import com.trallerd.quiz.dao.CategoriesDAO
-import com.trallerd.quiz.models.Categories.Category
+import com.trallerd.quiz.models.categories.Category
 import kotlinx.android.synthetic.main.recyclerview_category.view.*
 
 class CategoryAdapter() : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {

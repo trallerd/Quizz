@@ -10,7 +10,7 @@
     <string name="settings">Settings</string>
     <string name="play">Play</string>
     <string name="ranking">Ranking</string>
-    <string name="difficult">Choose Difficult</string>
+    <string name="difficult">Difficult</string>
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
@@ -18,11 +18,14 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="string">%1$s</string>
     <string name="category">Category</string>
-    <string name="score">%1$.0f</string>
+    <string name="integer">%1$.0f</string>
+    <string name="score">Score</string>
     <string name="resume_games">Resume</string>
     <string name="game">Game</string>
     <string name="name">Name</string>
     <string name="invalid_user">User doesn\'t exist!!</string>
     <string name="fields_error">Please complete all fields!!</string>
     <string name="password_error">Passwords doesn\'t match!!</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
 </resources>

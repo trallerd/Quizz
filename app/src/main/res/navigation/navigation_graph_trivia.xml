@@ -3,38 +3,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph_trivia"
-    app:startDestination="@id/home2">
+    app:startDestination="@id/difficultFragment">
 
     <fragment
-        android:id="@+id/home2"
-        android:name="com.trallerd.quiz.fragments.Home"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:id="@+id/difficultFragment"
+        android:name="com.trallerd.quiz.fragments.Difficult"
+        android:label="fragment_difficult"
+        tools:layout="@layout/fragment_difficult">
         <action
-            android:id="@+id/action_home2_to_category2"
-            app:destination="@id/category2" />
+            android:id="@+id/action_difficult_to_category"
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_difficult_to_game"
+            app:destination="@id/gameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
-        android:id="@+id/category2"
+        android:id="@+id/categoryFragment"
         android:name="com.trallerd.quiz.fragments.Category"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" >
+        tools:layout="@layout/fragment_category">
         <action
-            android:id="@+id/action_category2_to_game"
-            app:destination="@id/game" />
+            android:id="@+id/action_category_to_game"
+            app:destination="@id/gameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="difficult"
+            app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/ranking2"
+        android:id="@+id/rankingFragment"
         android:name="com.trallerd.quiz.fragments.Ranking"
         android:label="fragment_ranking"
         tools:layout="@layout/fragment_ranking" />
     <fragment
-        android:id="@+id/game"
+        android:id="@+id/gameFragment"
         android:name="com.trallerd.quiz.fragments.Game"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" >
+        tools:layout="@layout/fragment_game">
         <action
-            android:id="@+id/action_game_to_ranking2"
-            app:destination="@id/ranking2" />
+            android:id="@+id/action_game_to_ranking"
+            app:destination="@id/rankingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_game_to_resume"
+            app:destination="@id/resumeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="difficult"
+            app:argType="string" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/resumeFragment"
+        android:name="com.trallerd.quiz.fragments.Resume"
+        android:label="fragment_resume"
+        tools:layout="@layout/fragment_resume">
+        <action
+            android:id="@+id/action_resume_to_home"
+            app:destination="@id/difficultFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="difficult"
+            app:argType="string" />
+        <argument
+            android:name="category"
+            app:argType="string" />
     </fragment>
 </navigation>

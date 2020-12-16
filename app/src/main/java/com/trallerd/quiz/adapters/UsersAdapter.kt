@@ -1,8 +1,8 @@
 package com.trallerd.quiz.adapters
 
 import com.trallerd.quiz.dao.UsersDAO
-import com.trallerd.quiz.models.Login.Login
-import com.trallerd.quiz.models.Users.User
+import com.trallerd.quiz.models.login.Login
+import com.trallerd.quiz.models.users.User
 
 class UsersAdapter {
     var userDao = UsersDAO()
