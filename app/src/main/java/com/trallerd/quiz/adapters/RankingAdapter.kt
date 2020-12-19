@@ -16,7 +16,7 @@ class RankingAdapter(): RecyclerView.Adapter<RankingAdapter.RankingHolder>() {
 
     init {
         rankingDAO.getRanking { rankingAPI->
-            rankings = rankingAPI.data.ranking
+            rankings = rankingAPI.data!!.ranking
             notifyDataSetChanged()
         }
     }

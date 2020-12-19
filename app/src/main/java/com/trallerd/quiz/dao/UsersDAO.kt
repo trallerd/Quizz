@@ -22,9 +22,12 @@ class UsersDAO {
                     call : Call<UsersResponse> ,
                     response : Response<UsersResponse>
             ) {
+                Log.i("Failure" , response.body().toString())
+
                 if(response.body()!=null){
                     val userAPI = response.body()!!
-                    Log.i("USER", response.body().toString())
+                    Log.i("Failure" , response.body().toString())
+
                     finished(userAPI)
                 }
             }
@@ -42,7 +45,11 @@ class UsersDAO {
                     call : Call<LoginResponse> ,
                     response : Response<LoginResponse>
             ) {
+                Log.i("Failure" , response.body().toString())
+
                 if(response.body()!=null){
+                    Log.i("Failure" , response.body().toString())
+
                     val loginAPI = response.body()!!
                     finished(loginAPI)
                 }

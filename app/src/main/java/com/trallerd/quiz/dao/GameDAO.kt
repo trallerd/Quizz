@@ -19,11 +19,16 @@ class GameDAO {
     val gameService = gameRetrofit.create(GameService::class.java)
 
 
-    fun start(difficulty: String , category_id: Int , authorization: String, finished: (GameResponse)->Unit){
+    fun start(difficulty: String , category_id: Long , authorization: String, finished: (GameResponse)->Unit){
         gameService.start(difficulty,category_id,authorization).enqueue(object: Callback<GameResponse>{
             override fun onResponse(call : Call<GameResponse> , response : Response<GameResponse>) {
+                Log.i("Failure" , response.body()!!.toString())
                 if (response.body()!=null){
-                    finished(response.body()!!)
+                    if (response.body()!!.status=="success"){
+                        finished(response.body()!!)
+
+                    }
+
                 }
             }
 
@@ -38,7 +43,12 @@ class GameDAO {
         gameService.startRandom(authorization).enqueue(object : Callback<GameResponse>{
             override fun onResponse(call : Call<GameResponse> , response : Response<GameResponse>) {
                 if (response.body()!=null){
-                    finished(response.body()!!)
+                    if (response.body()!!.status=="success"){
+                        Log.i("Failure" , response.body()!!.data!!.game.status)
+                        finished(response.body()!!)
+
+                    }
+
                 }
             }
 
@@ -55,8 +65,15 @@ class GameDAO {
                     call : Call<EndGameResponse> ,
                     response : Response<EndGameResponse>
             ) {
+
+
                 if (response.body()!=null){
-                    finished(response.body()!!)
+                    if (response.body()!!.status=="success"){
+                        Log.i("Failure" , response.body()!!.toString())
+                        finished(response.body()!!)
+
+                    }
+
                 }
             }
 

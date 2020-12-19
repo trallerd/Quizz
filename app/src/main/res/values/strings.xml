@@ -28,4 +28,5 @@
     <string name="password_error">Passwords doesn\'t match!!</string>
     <string name="start">Start</string>
     <string name="end">End</string>
+    <string name="continue_question">Want another one ?</string>
 </resources>

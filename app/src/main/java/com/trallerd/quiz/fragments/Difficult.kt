@@ -9,16 +9,18 @@ import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.trallerd.quiz.Controller
 import com.trallerd.quiz.R
+import com.trallerd.quiz.adapters.GameAdapter
 
-class Difficult : Fragment(), View.OnClickListener {
-
-    var navController: NavController? = null
+class Difficult : Fragment() , View.OnClickListener {
+    val gameAdapter = GameAdapter()
+    var navController : NavController? = null
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_difficult, container, false)
+            inflater : LayoutInflater , container : ViewGroup? ,
+            savedInstanceState : Bundle?
+    ) : View? {
+        return inflater.inflate(R.layout.fragment_difficult , container , false)
     }
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
@@ -31,21 +33,26 @@ class Difficult : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v : View?) {
-        when(v!!.id){
-            R.id.btnEasy->{
-                val bundle = bundleOf("difficult" to "easy")
-                navController!!.navigate(R.id.action_difficult_to_category,bundle)
+        when (v!!.id) {
+            R.id.btnEasy -> {
+                Controller.difficult = "easy"
+                navController!!.navigate(R.id.action_difficult_to_category)
             }
-            R.id.btnMedium->{
-                val bundle = bundleOf("difficult" to "medium")
-                navController!!.navigate(R.id.action_difficult_to_category,bundle)
+            R.id.btnMedium -> {
+                Controller.difficult = "medium"
+                navController!!.navigate(R.id.action_difficult_to_category)
             }
-            R.id.btnHard->{
-                val bundle = bundleOf("difficult" to "hard")
-                navController!!.navigate(R.id.action_difficult_to_category,bundle)
+            R.id.btnHard -> {
+                Controller.difficult = "hard"
+                navController!!.navigate(R.id.action_difficult_to_category)
             }
-            R.id.btnRandom->{
-
+            R.id.btnRandom -> {
+                gameAdapter.startRandom {game->
+                    if (game.status== "success"){
+                        Controller.game = game.data!!.game
+                        navController!!.navigate(R.id.action_difficult_to_game)
+                    }
+                }
             }
         }
     }

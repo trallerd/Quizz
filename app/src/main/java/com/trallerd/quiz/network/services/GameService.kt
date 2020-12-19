@@ -7,11 +7,11 @@ import retrofit2.http.*
 
 interface GameService {
     @GET("games")
-    fun startRandom(@Header("Authorization ") authorization: String): Call<GameResponse>
+    fun startRandom(@Header("Authorization") authorization: String): Call<GameResponse>
 
     @GET("games")
-    fun start(@Query("difficulty") difficulty: String,@Query("category_id") category_id: Int, @Header("Authorization ") authorization: String): Call<GameResponse>
+    fun start(@Query("difficulty") difficulty: String,@Query("category_id") category_id: Long, @Header("Authorization") authorization: String): Call<GameResponse>
 
    @DELETE("games")
-   fun endGame(@Header("Authorization ") authorization: String): Call<EndGameResponse>
+   fun endGame(@Header("Authorization") authorization: String): Call<EndGameResponse>
 }

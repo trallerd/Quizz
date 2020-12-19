@@ -1,6 +1,7 @@
 package com.trallerd.quiz.dao
 
 import android.util.Log
+import com.trallerd.quiz.Controller
 import com.trallerd.quiz.models.answer.AnswerResponde
 import com.trallerd.quiz.models.problems.ProblemResponse
 import com.trallerd.quiz.network.services.ProblemsService
@@ -25,13 +26,19 @@ class ProblemDAO {
                     call : Call<ProblemResponse> ,
                     response : Response<ProblemResponse>
             ) {
-                if(response.body()!=null){
-                    finished(response.body()!!)
+                if (response.body()!=null){
+                    if (response.body()!!.status=="success"){
+                        Log.i("Failure", response.body()!!.toString()+"getNext")
+                        val resp = response.body()!!
+                        finished(resp)
+
+                    }
+
                 }
             }
 
             override fun onFailure(call : Call<ProblemResponse> , t : Throwable) {
-                Log.i("Failure" , t.message.toString())
+                Log.i("Failure" , t.message.toString()+"getNext")
             }
         })
 
@@ -42,13 +49,18 @@ class ProblemDAO {
                     call : Call<ProblemResponse> ,
                     response : Response<ProblemResponse>
             ) {
-                if(response.body()!=null){
-                    finished(response.body()!!)
+                if (response.body()!=null){
+                    if (response.body()!!.status=="success"){
+                        Log.i("Failure" , response.body()!!.toString()+"getCurrent")
+                        finished(response.body()!!)
+
+                    }
+
                 }
             }
 
             override fun onFailure(call : Call<ProblemResponse> , t : Throwable) {
-                Log.i("Failure" , t.message.toString())
+                Log.i("Failure" , t.message.toString()+"getNext")
             }
         })
 
@@ -59,13 +71,18 @@ class ProblemDAO {
                     call : Call<AnswerResponde> ,
                     response : Response<AnswerResponde>
             ) {
-                if(response.body()!=null){
-                    finished(response.body()!!)
+                if (response.body()!=null){
+                    if (response.body()!!.status=="success"){
+                        Log.i("Failure" , response.body()!!.toString()+"answerCorrect")
+                        finished(response.body()!!)
+
+                    }
+
                 }
             }
 
             override fun onFailure(call : Call<AnswerResponde> , t : Throwable) {
-                Log.i("Failure" , t.message.toString())
+                Log.i("Failure" , t.message.toString()+"answerCorrect")
             }
         })
 

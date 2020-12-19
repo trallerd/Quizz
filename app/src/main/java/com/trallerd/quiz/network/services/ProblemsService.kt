@@ -11,11 +11,11 @@ import retrofit2.http.Query
 interface ProblemsService {
 
     @GET("problems/next")
-    fun getNext(@Header("Authorization ") authorization: String): Call<ProblemResponse>
+    fun getNext(@Header("Authorization") authorization: String): Call<ProblemResponse>
 
     @GET("/problems/view")
-    fun getCurrent(@Header("Authorization ") authorization: String): Call<ProblemResponse>
+    fun getCurrent(@Header("Authorization") authorization: String): Call<ProblemResponse>
 
     @POST("problems/answer")
-    fun answer(@Query("answer") answer: Int,@Header("Authorization ") authorization: String): Call<AnswerResponde>
+    fun answer(@Query("answer") answer: Int,@Header("Authorization") authorization: String): Call<AnswerResponde>
 }

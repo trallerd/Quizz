@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.trallerd.quiz.Controller
 import com.trallerd.quiz.R
 import com.trallerd.quiz.adapters.CategoryAdapter
 import kotlinx.android.synthetic.main.fragment_category.view.*
@@ -27,4 +29,6 @@ class Category : Fragment() {
         )
         return view
     }
+
+
 }
