@@ -1,8 +1,11 @@
 # Super Trivia
 ## Aplicativo para resolução de quizzes (jogo de perguntas e respostas).
+### [Video Demo da Aplicação](https://www.youtube.com/watch?v=kc12VihTlDI)
+
 
 > Uma API foi integralmente desenvolvida para tal: 
 https://super-trivia-server.herokuapp.com
+
 
 ![](app/src/main/res/drawable-v24/logo.png)
 
