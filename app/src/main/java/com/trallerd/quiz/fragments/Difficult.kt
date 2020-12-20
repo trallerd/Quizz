@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.os.bundleOf
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.trallerd.quiz.Controller
@@ -14,13 +14,21 @@ import com.trallerd.quiz.R
 import com.trallerd.quiz.adapters.GameAdapter
 
 class Difficult : Fragment() , View.OnClickListener {
-    val gameAdapter = GameAdapter()
+    lateinit var gameAdapter : GameAdapter
     var navController : NavController? = null
+    lateinit var build : AlertDialog.Builder
+
     override fun onCreateView(
             inflater : LayoutInflater , container : ViewGroup? ,
             savedInstanceState : Bundle?
     ) : View? {
-        return inflater.inflate(R.layout.fragment_difficult , container , false)
+        val view =  inflater.inflate(R.layout.fragment_difficult , container , false)
+        build = AlertDialog.Builder(view.context)
+            .setView(R.layout.activity_loading)
+            .setCancelable(false)
+
+        gameAdapter = GameAdapter(view)
+        return view
     }
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
@@ -47,8 +55,11 @@ class Difficult : Fragment() , View.OnClickListener {
                 navController!!.navigate(R.id.action_difficult_to_category)
             }
             R.id.btnRandom -> {
+                val load : AlertDialog = build.create()
+                load.show()
                 gameAdapter.startRandom {game->
                     if (game.status== "success"){
+                        load.dismiss()
                         Controller.game = game.data!!.game
                         navController!!.navigate(R.id.action_difficult_to_game)
                     }

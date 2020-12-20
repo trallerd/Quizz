@@ -1,9 +1,11 @@
 package com.trallerd.quiz.adapters
 
 import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -14,16 +16,22 @@ import com.trallerd.quiz.models.problems.AnswerProblem
 import com.trallerd.quiz.models.problems.ProblemResponse
 import kotlinx.android.synthetic.main.recyclerview_answers.view.*
 
-class ProblemAdapter(answers : List<AnswerProblem>) :
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+class ProblemAdapter(answers : List<AnswerProblem> , view : View) :
     RecyclerView.Adapter<ProblemAdapter.ProblemHolder>() {
+    val build : AlertDialog.Builder = AlertDialog.Builder(view.context)
+        .setView(R.layout.activity_loading)
+        .setCancelable(false)
+    val load : AlertDialog = build.create()
     private val problemDAO = ProblemDAO()
-    private val gameAdapter = GameAdapter()
+    private val gameAdapter = GameAdapter(view)
     private var listAnswers = listOf<AnswerProblem>()
 
 
     init {
         listAnswers = answers
     }
+
 
     fun getNext(done : (ProblemResponse) -> Unit) {
         val token = Controller.user.token!!
@@ -69,7 +77,9 @@ class ProblemAdapter(answers : List<AnswerProblem>) :
         fun fillView(answer : AnswerProblem) {
             itemView.txtAnswers.text = answer.description
             itemView.setOnClickListener {
+                load.show()
                 answer(answer.order) { answerAPI ->
+                    load.dismiss()
                     if (answer.order == answerAPI) {
                         itemView.backgroundAnswer.setBackgroundColor(Color.parseColor("#008000"))
 
@@ -82,14 +92,18 @@ class ProblemAdapter(answers : List<AnswerProblem>) :
                     mAlertDialog.setMessage(R.string.continue_question)
                     mAlertDialog.setPositiveButton("Yes") { dialog , id ->
                         Controller.problem = false
-                        if (Controller.random){
-                            gameAdapter.startRandom { game->
+                        if (Controller.random) {
+                            load.show()
+                            gameAdapter.startRandom { game ->
+                                load.dismiss()
                                 Controller.game = game.data!!.game
                                 val navController = Navigation.findNavController(it)
                                 navController.navigate(R.id.action_gameFragment_self)
                             }
-                        }else{
-                            gameAdapter.start { game->
+                        } else {
+                            load.show()
+                            gameAdapter.start { game ->
+                                load.dismiss()
                                 Controller.game = game.data!!.game
                                 val navController = Navigation.findNavController(it)
                                 navController.navigate(R.id.action_gameFragment_self)

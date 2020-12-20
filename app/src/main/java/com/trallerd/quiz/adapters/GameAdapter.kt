@@ -1,11 +1,12 @@
 package com.trallerd.quiz.adapters
 
+import android.view.View
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.dao.GameDAO
 import com.trallerd.quiz.models.game.end.EndGameResponse
 import com.trallerd.quiz.models.game.start.GameResponse
 
-class GameAdapter()  {
+class GameAdapter(view : View) {
     private val gameDAO = GameDAO()
 
 

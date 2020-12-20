@@ -1,23 +1,33 @@
 package com.trallerd.quiz.adapters
 
+import android.app.AlertDialog
 import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.trallerd.quiz.R
 import com.trallerd.quiz.dao.RankingDAO
 import com.trallerd.quiz.models.ranking.Ranking
 import kotlinx.android.synthetic.main.recyclerview_ranking.view.*
 
-class RankingAdapter(): RecyclerView.Adapter<RankingAdapter.RankingHolder>() {
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+class RankingAdapter(view : View) : RecyclerView.Adapter<RankingAdapter.RankingHolder>() {
     private val rankingDAO = RankingDAO()
+    val build : AlertDialog.Builder = AlertDialog.Builder(view.context)
+        .setView(R.layout.activity_loading)
+        .setCancelable(false)
+    val load : AlertDialog = build.create()
     private var rankings = listOf<Ranking>()
 
     init {
+        load.show()
         rankingDAO.getRanking { rankingAPI->
             rankings = rankingAPI.data!!.ranking
             notifyDataSetChanged()
+            load.dismiss()
         }
     }
 

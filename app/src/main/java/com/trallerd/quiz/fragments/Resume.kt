@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -20,18 +21,27 @@ class Resume : Fragment() {
     private lateinit var gameAdapter : GameAdapter
     var navController : NavController? = null
 
+
+
     override fun onCreateView(
             inflater : LayoutInflater , container : ViewGroup? ,
             savedInstanceState : Bundle?
     ) : View? {
         val view = inflater.inflate(R.layout.fragment_resume , container , false)
-        setView()
+        val build: AlertDialog.Builder = AlertDialog.Builder(view.context)
+            .setView(R.layout.activity_loading)
+            .setCancelable(false)
+        val load = build.create()
+        setView(view,load)
+
         return view
     }
 
-    private fun setView() {
-        gameAdapter = GameAdapter()
+    private fun setView(view : View , load : AlertDialog) {
+        gameAdapter = GameAdapter(view)
+        load.show()
         gameAdapter.endGame { endGame ->
+            load.dismiss()
             Controller.endGame = endGame.data!!
             if (Controller.endGame.score > 0) {
                 valueScoreResume.setTextColor(Color.parseColor("#008000"))
