@@ -6,13 +6,20 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface GameService {
-    @Headers("Content-Type:application/json; charset=UTF-8")
     @GET("games")
-    fun startRandom(@Header("Authorization") authorization: String): Call<GameResponse>
     @Headers("Content-Type:application/json; charset=UTF-8")
+    fun startRandom(@Header("Authorization") authorization : String) : Call<GameResponse>
+
     @GET("games")
-    fun start(@Query("difficulty") difficulty: String,@Query("category_id") category_id: Long, @Header("Authorization") authorization: String): Call<GameResponse>
     @Headers("Content-Type:application/json; charset=UTF-8")
-   @DELETE("games")
-   fun endGame(@Header("Authorization") authorization: String): Call<EndGameResponse>
+
+    fun start(
+            @Query("difficulty") difficulty : String ,
+            @Query("category_id") category_id : Long ,
+            @Header("Authorization") authorization : String
+    ) : Call<GameResponse>
+
+    @DELETE("games")
+    @Headers("Content-Type:application/json; charset=UTF-8")
+    fun endGame(@Header("Authorization") authorization : String) : Call<EndGameResponse>
 }

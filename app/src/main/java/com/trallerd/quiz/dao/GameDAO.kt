@@ -1,6 +1,7 @@
 package com.trallerd.quiz.dao
 
 import android.util.Log
+import com.google.gson.GsonBuilder
 import com.trallerd.quiz.models.game.end.EndGameResponse
 import com.trallerd.quiz.models.game.start.GameResponse
 import com.trallerd.quiz.network.services.GameService

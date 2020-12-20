@@ -29,4 +29,6 @@
     <string name="start">Start</string>
     <string name="end">End</string>
     <string name="continue_question">Want another one ?</string>
+    <string name="open_question">You have a open Question, would you like to start another game ?</string>
+    <string name="logout">Logout</string>
 </resources>

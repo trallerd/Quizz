@@ -1,6 +1,7 @@
 package com.trallerd.quiz.fragments
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -18,6 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.trallerd.quiz.Controller
 import com.trallerd.quiz.Loading
 import com.trallerd.quiz.MainActivity
 import com.trallerd.quiz.R
@@ -28,13 +30,32 @@ class Login : Fragment() , View.OnClickListener {
     lateinit var userAdapter : UsersAdapter
     var navController : NavController? = null
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
             inflater : LayoutInflater ,
             container : ViewGroup? ,
             savedInstanceState : Bundle?
     ) : View? {
+        val view = inflater.inflate(R.layout.fragment_login , container , false)
         userAdapter = UsersAdapter()
-        return inflater.inflate(R.layout.fragment_login , container , false)
+        val build : AlertDialog.Builder = AlertDialog.Builder(activity)
+        build.setView(R.layout.activity_loading)
+        build.setCancelable(false)
+        val pref = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
+        if (pref?.getString("email", null) != null) {
+            val load : AlertDialog = build.create()
+            load.show()
+            userAdapter.login(
+                pref.getString("email", "").toString(),
+                pref.getString("password", "").toString()
+            ){
+                load.dismiss()
+                val intent = Intent(this.context, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+        }
+        return view
     }
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
@@ -60,6 +81,7 @@ class Login : Fragment() , View.OnClickListener {
                             passwordLogin.text.toString()
                         ) { statusAPI ->
                             if (statusAPI == "success") {
+                                saveData()
                                 load.dismiss()
                                 val intent = Intent(this.context , MainActivity::class.java)
                                 startActivity(intent)
@@ -83,6 +105,13 @@ class Login : Fragment() , View.OnClickListener {
             }
             R.id.btnRegisterLogin -> navController!!.navigate(R.id.action_login_to_register)
         }
+    }
+    private fun saveData() {
+        val pref = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
+        val edt = pref?.edit()
+        edt?.putString("email", emailLogin.text.toString())
+        edt?.putString("password", passwordLogin.text.toString())
+        edt?.apply()
     }
 
 

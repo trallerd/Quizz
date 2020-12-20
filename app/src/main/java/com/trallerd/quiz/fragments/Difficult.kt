@@ -1,5 +1,7 @@
 package com.trallerd.quiz.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,8 +12,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.trallerd.quiz.Controller
+import com.trallerd.quiz.LoginRegisterActivity
+import com.trallerd.quiz.MainActivity
 import com.trallerd.quiz.R
 import com.trallerd.quiz.adapters.GameAdapter
+import com.trallerd.quiz.models.users.User
 
 class Difficult : Fragment() , View.OnClickListener {
     lateinit var gameAdapter : GameAdapter
@@ -38,6 +43,7 @@ class Difficult : Fragment() , View.OnClickListener {
         view.findViewById<Button>(R.id.btnMedium).setOnClickListener(this)
         view.findViewById<Button>(R.id.btnHard).setOnClickListener(this)
         view.findViewById<Button>(R.id.btnRandom).setOnClickListener(this)
+        view.findViewById<Button>(R.id.btnLogout).setOnClickListener(this)
     }
 
     override fun onClick(v : View?) {
@@ -64,6 +70,20 @@ class Difficult : Fragment() , View.OnClickListener {
                         navController!!.navigate(R.id.action_difficult_to_game)
                     }
                 }
+            }
+            R.id.btnLogout->{
+                val pref = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
+                val edt = pref?.edit()
+                edt?.putString("email", null)
+                edt?.putString("password", null)
+                edt?.commit()
+
+                Controller.user = User("","","")
+                Controller.user.token = ""
+
+                val intent = Intent(this.context, LoginRegisterActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
         }
     }

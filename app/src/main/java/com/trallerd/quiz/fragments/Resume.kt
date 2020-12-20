@@ -1,6 +1,7 @@
 package com.trallerd.quiz.fragments
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,6 @@ class Resume : Fragment() {
     var navController : NavController? = null
 
 
-
     override fun onCreateView(
             inflater : LayoutInflater , container : ViewGroup? ,
             savedInstanceState : Bundle?
@@ -38,11 +38,12 @@ class Resume : Fragment() {
     }
 
     private fun setView(view : View , load : AlertDialog) {
+
         gameAdapter = GameAdapter(view)
         load.show()
         gameAdapter.endGame { endGame ->
             load.dismiss()
-            Controller.endGame = endGame.data!!
+            Controller.endGame = endGame.data!!.game
             if (Controller.endGame.score > 0) {
                 valueScoreResume.setTextColor(Color.parseColor("#008000"))
             } else {
@@ -51,7 +52,9 @@ class Resume : Fragment() {
             valueScoreResume.text = Controller.endGame.score.toString()
             valueDifficultResume.text = Controller.difficult
             valueCategoryResume.text = Controller.category.name
-            valueEndResume.text = Controller.endGame.finishedAt
+
+
+            valueEndResume.text =  Controller.endGame.finishedAt
             valueStarResume.text = Controller.endGame.startedAt
         }
     }
@@ -71,4 +74,5 @@ class Resume : Fragment() {
 
         }
     }
+
 }

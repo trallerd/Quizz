@@ -12,11 +12,11 @@ import retrofit2.http.POST
 interface UsersService {
 
     @POST("users")
-    @Headers("Content-Type: application/json")
+    @Headers("Content-Type:application/json; charset=UTF-8")
     fun insert(@Body user: User): Call<UsersResponse>
 
     @POST("auth")
-    @Headers("Content-Type: application/json")
+    @Headers("Content-Type:application/json; charset=UTF-8")
     fun login(@Body login : Login): Call<LoginResponse>
 
 }

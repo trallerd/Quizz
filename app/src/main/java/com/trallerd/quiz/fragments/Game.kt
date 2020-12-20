@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.R
@@ -57,6 +58,7 @@ class Game : Fragment() {
             }
         } else {
             problemAdapter.getCurrent { problemAPI ->
+                openQuestion(view)
                 Controller.difficult = problemAPI.data!!.problem.difficulty
                 Controller.category = problemAPI.data!!.problem.category
                 Controller.question = problemAPI.data!!.problem.question
@@ -81,6 +83,21 @@ class Game : Fragment() {
             false
         )
 
+    }
+
+    private fun openQuestion(view : View) {
+        val mAlertDialog = androidx.appcompat.app.AlertDialog.Builder(view.context)
+        mAlertDialog.setIcon(R.drawable.question)
+        mAlertDialog.setTitle(R.string.app_name)
+        mAlertDialog.setMessage(R.string.open_question)
+        mAlertDialog.setPositiveButton("Yes") { dialog , id ->
+            val navController = Navigation.findNavController(view)
+            navController.navigate(R.id.action_game_to_resume)
+        }
+        mAlertDialog.setNegativeButton("No") { dialog , id ->
+
+        }
+        mAlertDialog.show()
     }
 
 }
