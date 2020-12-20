@@ -120,7 +120,7 @@
         android:background="@android:drawable/divider_horizontal_bright"
         android:foregroundGravity="center"
         android:text="@string/register"
-        android:textColor="#f7797d"
+        android:textColor="@android:color/holo_green_light"
         app:layout_constraintCircleRadius="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

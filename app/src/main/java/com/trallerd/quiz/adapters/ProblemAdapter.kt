@@ -2,6 +2,7 @@ package com.trallerd.quiz.adapters
 
 import android.graphics.Color
 import android.os.Build
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.trallerd.quiz.dao.ProblemDAO
 import com.trallerd.quiz.models.problems.AnswerProblem
 import com.trallerd.quiz.models.problems.ProblemResponse
 import kotlinx.android.synthetic.main.recyclerview_answers.view.*
+
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class ProblemAdapter(answers : List<AnswerProblem> , view : View) :
@@ -116,7 +118,10 @@ class ProblemAdapter(answers : List<AnswerProblem> , view : View) :
                         val navController = Navigation.findNavController(it)
                         navController.navigate(R.id.action_game_to_resume)
                     }
-                    mAlertDialog.show()
+                    val handler = Handler()
+                    handler.postDelayed(Runnable {
+                        mAlertDialog.show()
+                    } , 1500)
                 }
             }
 

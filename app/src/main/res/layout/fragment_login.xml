@@ -77,7 +77,7 @@
         android:background="@android:drawable/divider_horizontal_bright"
         android:foregroundGravity="center"
         android:text="@string/login"
-        android:textColor="#f7797d"
+        android:textColor="@android:color/holo_green_light"
         app:layout_constraintCircleRadius="20sp"
         app:layout_constraintEnd_toEndOf="@+id/passwordLogin"
         app:layout_constraintStart_toStartOf="@+id/passwordLogin"

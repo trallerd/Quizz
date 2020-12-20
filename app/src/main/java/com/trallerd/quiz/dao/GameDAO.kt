@@ -12,39 +12,48 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class GameDAO {
-    val gameRetrofit =
+    val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+    val gameRetrofit : Retrofit =
         Retrofit.Builder().baseUrl("https://super-trivia-server.herokuapp.com/")
-            .addConverterFactory(
-                GsonConverterFactory.create()
-            ).build()
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
     val gameService = gameRetrofit.create(GameService::class.java)
 
 
-    fun start(difficulty: String , category_id: Long , authorization: String, finished: (GameResponse)->Unit){
-        gameService.start(difficulty,category_id,authorization).enqueue(object: Callback<GameResponse>{
-            override fun onResponse(call : Call<GameResponse> , response : Response<GameResponse>) {
-                Log.i("Failure" , response.body()!!.toString())
-                if (response.body()!=null){
-                    if (response.body()!!.status=="success"){
-                        finished(response.body()!!)
+    fun start(
+            difficulty : String ,
+            category_id : Long ,
+            authorization : String ,
+            finished : (GameResponse) -> Unit
+    ) {
+        gameService.start(difficulty , category_id , authorization)
+            .enqueue(object : Callback<GameResponse> {
+                override fun onResponse(
+                        call : Call<GameResponse> ,
+                        response : Response<GameResponse>
+                ) {
+                    Log.i("Failure" , response.body()!!.toString())
+                    if (response.body() != null) {
+                        if (response.body()!!.status == "success") {
+                            finished(response.body()!!)
+
+                        }
 
                     }
-
                 }
-            }
 
-            override fun onFailure(call : Call<GameResponse> , t : Throwable) {
-                Log.i("Failure" , t.message.toString())
-            }
+                override fun onFailure(call : Call<GameResponse> , t : Throwable) {
+                    Log.i("Failure" , t.message.toString())
+                }
 
-        })
+            })
     }
 
-    fun startRandom(authorization : String, finished : (GameResponse) -> Unit){
-        gameService.startRandom(authorization).enqueue(object : Callback<GameResponse>{
+    fun startRandom(authorization : String , finished : (GameResponse) -> Unit) {
+        gameService.startRandom(authorization).enqueue(object : Callback<GameResponse> {
             override fun onResponse(call : Call<GameResponse> , response : Response<GameResponse>) {
-                if (response.body()!=null){
-                    if (response.body()!!.status=="success"){
+                if (response.body() != null) {
+                    if (response.body()!!.status == "success") {
                         Log.i("Failure" , response.body()!!.data!!.game.status)
                         finished(response.body()!!)
 
@@ -60,16 +69,16 @@ class GameDAO {
         })
     }
 
-    fun endGame(authorization : String, finished : (EndGameResponse) -> Unit){
-        gameService.endGame(authorization).enqueue(object : Callback<EndGameResponse>{
+    fun endGame(authorization : String , finished : (EndGameResponse) -> Unit) {
+        gameService.endGame(authorization).enqueue(object : Callback<EndGameResponse> {
             override fun onResponse(
                     call : Call<EndGameResponse> ,
                     response : Response<EndGameResponse>
             ) {
 
 
-                if (response.body()!=null){
-                    if (response.body()!!.status=="success"){
+                if (response.body() != null) {
+                    if (response.body()!!.status == "success") {
                         Log.i("Failure" , response.body()!!.toString())
                         finished(response.body()!!)
 

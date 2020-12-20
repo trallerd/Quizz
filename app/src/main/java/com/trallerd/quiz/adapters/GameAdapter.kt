@@ -11,16 +11,12 @@ class GameAdapter(view : View) {
 
 
     fun start(done : (game : GameResponse) -> Unit) {
+        Controller.random = false
         val token = Controller.user.token!!
         val difficulty = Controller.difficult
         val category = Controller.category.id
         gameDAO.start(difficulty , category , token) { gameAPI ->
-            if (gameAPI.data!!.game.creation=="new_game"){
-                done(gameAPI)
-            }else{
-                Controller.problem = true
-                done(gameAPI)
-            }
+            done(gameAPI)
         }
     }
 
@@ -28,12 +24,7 @@ class GameAdapter(view : View) {
         Controller.random = true
         val token = Controller.user.token!!
         gameDAO.startRandom(token) { gameAPI ->
-            if (gameAPI.data!!.game.creation=="new_game"){
                 done(gameAPI)
-            }else{
-                Controller.problem = true
-                done(gameAPI)
-            }
         }
 
     }

@@ -17,6 +17,7 @@ import com.trallerd.quiz.models.categories.Category
 import com.trallerd.quiz.models.game.end.EndGame
 import com.trallerd.quiz.models.game.start.Game
 import kotlinx.android.synthetic.main.fragment_resume.*
+import java.util.*
 
 class Resume : Fragment() {
     private lateinit var gameAdapter : GameAdapter

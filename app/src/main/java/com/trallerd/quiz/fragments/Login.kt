@@ -5,11 +5,10 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,14 +16,15 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.trallerd.quiz.Controller
-import com.trallerd.quiz.Loading
 import com.trallerd.quiz.MainActivity
 import com.trallerd.quiz.R
 import com.trallerd.quiz.adapters.UsersAdapter
 import kotlinx.android.synthetic.main.fragment_login.*
+import java.net.InetAddress
+
 
 class Login : Fragment() , View.OnClickListener {
     lateinit var userAdapter : UsersAdapter
@@ -41,16 +41,16 @@ class Login : Fragment() , View.OnClickListener {
         val build : AlertDialog.Builder = AlertDialog.Builder(activity)
         build.setView(R.layout.activity_loading)
         build.setCancelable(false)
-        val pref = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
-        if (pref?.getString("email", null) != null) {
+        val pref = activity?.getSharedPreferences("user" , Context.MODE_PRIVATE)
+        if (pref?.getString("email" , null) != null) {
             val load : AlertDialog = build.create()
             load.show()
             userAdapter.login(
-                pref.getString("email", "").toString(),
-                pref.getString("password", "").toString()
-            ){
+                pref.getString("email" , "").toString() ,
+                pref.getString("password" , "").toString()
+            ) {
                 load.dismiss()
-                val intent = Intent(this.context, MainActivity::class.java)
+                val intent = Intent(this.context , MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }
@@ -60,6 +60,7 @@ class Login : Fragment() , View.OnClickListener {
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
         super.onViewCreated(view , savedInstanceState)
+
         navController = Navigation.findNavController(view)
         view.findViewById<Button>(R.id.btnLogin).setOnClickListener(this)
         view.findViewById<Button>(R.id.btnRegisterLogin).setOnClickListener(this)
@@ -85,7 +86,7 @@ class Login : Fragment() , View.OnClickListener {
                                 load.dismiss()
                                 val intent = Intent(this.context , MainActivity::class.java)
                                 startActivity(intent)
-                            }else {
+                            } else {
                                 load.dismiss()
                                 Toast.makeText(
                                     this.context ,
@@ -106,11 +107,19 @@ class Login : Fragment() , View.OnClickListener {
             R.id.btnRegisterLogin -> navController!!.navigate(R.id.action_login_to_register)
         }
     }
+
+    private fun conectivity() : Boolean {
+        val connectivityManager =
+            context?.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
+
     private fun saveData() {
-        val pref = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
+        val pref = activity?.getSharedPreferences("user" , Context.MODE_PRIVATE)
         val edt = pref?.edit()
-        edt?.putString("email", emailLogin.text.toString())
-        edt?.putString("password", passwordLogin.text.toString())
+        edt?.putString("email" , emailLogin.text.toString())
+        edt?.putString("password" , passwordLogin.text.toString())
         edt?.apply()
     }
 

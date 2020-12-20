@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/login">
+    app:startDestination="@id/internetCheck">
     <fragment
         android:id="@+id/login"
         android:name="com.trallerd.quiz.fragments.Login"
@@ -42,4 +42,17 @@
         android:name="com.trallerd.quiz.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/internetCheck"
+        android:name="com.trallerd.quiz.InternetCheck"
+        android:label="fragment_internet_check"
+        tools:layout="@layout/fragment_internet_check" >
+        <action
+            android:id="@+id/action_internetCheck_to_login"
+            app:destination="@id/login"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>
