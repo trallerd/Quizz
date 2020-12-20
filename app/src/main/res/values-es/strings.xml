@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="password">contraseña</string>
+    <string name="login">"iniciar sesión "</string>
+    <string name="register">Registrar</string>
+    <string name="back">Vuelve</string>
+    <string name="settings">ajustes</string>
+    <string name="play">jugar</string>
+    <string name="difficult">dificultad</string>
+    <string name="easy">fácil</string>
+    <string name="medium">Medio</string>
+    <string name="hard">Difícil</string>
+    <string name="random">Aleatorio</string>
+    <string name="confirm_password">"confirmar seña "</string>
+    <string name="category">categoría</string>
+    <string name="score">puntos</string>
+    <string name="resume_games">resumen</string>
+    <string name="game">juego</string>
+    <string name="name">nombre</string>
+    <string name="invalid_user">"¡El usuario no existe! "</string>
+    <string name="fields_error">"Porfavor complete todos los campos "</string>
+    <string name="password_error">Las contraseñas no son similares</string>
+    <string name="start">empezado</string>
+    <string name="end">terminado</string>
+    <string name="continue_question">Quieres otra pregunta?</string>
+    <string name="open_question">Tienes una pregunta abierta, ¿quieres iniciar otro juego?</string>
+    <string name="conectivity_error">No hay Internet, ¡conéctate para jugar!</string>
+    <string name="logout">salir</string>
+</resources>
