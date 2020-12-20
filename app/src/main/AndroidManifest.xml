@@ -12,7 +12,6 @@
         android:roundIcon="@drawable/question"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name=".InternerCheck"></activity>
         <activity android:name=".Loading" />
         <activity android:name=".LoginRegisterActivity">
             <intent-filter>
