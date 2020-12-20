@@ -13,7 +13,7 @@ class GameAdapter(view : View) {
     fun start(done : (game : GameResponse) -> Unit) {
         val token = Controller.user.token!!
         val difficulty = Controller.difficult
-        val category = Controller.category.id!!
+        val category = Controller.category.id
         gameDAO.start(difficulty , category , token) { gameAPI ->
             done(gameAPI)
         }

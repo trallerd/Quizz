@@ -42,7 +42,7 @@ class Game : Fragment() {
                 Controller.category = problemAPI.data!!.problem.category
                 Controller.question = problemAPI.data!!.problem.question
                 Controller.answers = problemAPI.data!!.problem.answers
-                questionGame.text = problemAPI.data!!.problem.question
+                questionGame.text = problemAPI.data!!.problem.question.replace("&quot;","'")
                 difficultGame.text = problemAPI.data!!.problem.difficulty
                 categoryGame.text = problemAPI.data!!.problem.category.name
                 if (Controller.game.score > 0) {
@@ -61,7 +61,7 @@ class Game : Fragment() {
                 Controller.category = problemAPI.data!!.problem.category
                 Controller.question = problemAPI.data!!.problem.question
                 Controller.answers = problemAPI.data!!.problem.answers
-                questionGame.text = problemAPI.data!!.problem.question
+                questionGame.text = problemAPI.data!!.problem.question.replace("&quot;","'")
                 difficultGame.text = problemAPI.data!!.problem.difficulty
                 categoryGame.text = problemAPI.data!!.problem.category.name
                 if (Controller.game.score > 0) {

@@ -24,13 +24,17 @@ import com.trallerd.quiz.R
 import com.trallerd.quiz.adapters.UsersAdapter
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class Login : Fragment(), View.OnClickListener {
+class Login : Fragment() , View.OnClickListener {
     lateinit var userAdapter : UsersAdapter
-    var navController: NavController? = null
+    var navController : NavController? = null
 
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater : LayoutInflater ,
+            container : ViewGroup? ,
+            savedInstanceState : Bundle?
+    ) : View? {
         userAdapter = UsersAdapter()
-        return inflater.inflate(R.layout.fragment_login,container,false)
+        return inflater.inflate(R.layout.fragment_login , container , false)
     }
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
@@ -42,14 +46,14 @@ class Login : Fragment(), View.OnClickListener {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onClick(v : View?) {
-        val build: AlertDialog.Builder = AlertDialog.Builder(activity)
+        val build : AlertDialog.Builder = AlertDialog.Builder(activity)
         build.setView(R.layout.activity_loading)
         build.setCancelable(false)
-        when(v!!.id){
-            R.id.btnLogin->{
+        when (v!!.id) {
+            R.id.btnLogin -> {
                 if (!TextUtils.isEmpty(emailLogin.text.toString())) {
                     if (!TextUtils.isEmpty(passwordLogin.text.toString())) {
-                        val load: AlertDialog = build.create()
+                        val load : AlertDialog = build.create()
                         load.show()
                         userAdapter.login(
                             emailLogin.text.toString() ,
@@ -59,7 +63,7 @@ class Login : Fragment(), View.OnClickListener {
                                 load.dismiss()
                                 val intent = Intent(this.context , MainActivity::class.java)
                                 startActivity(intent)
-                            } else {
+                            }else {
                                 load.dismiss()
                                 Toast.makeText(
                                     this.context ,
@@ -68,21 +72,18 @@ class Login : Fragment(), View.OnClickListener {
                                 ).show()
                             }
                         }
-                    }else{
-                        Toast.makeText(this.context,R.string.fields_error,Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT)
+                            .show()
                     }
-                }else{
-                    Toast.makeText(this.context,R.string.fields_error,Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT).show()
                 }
 
             }
-            R.id.btnRegisterLogin-> navController!!.navigate(R.id.action_login_to_register)
+            R.id.btnRegisterLogin -> navController!!.navigate(R.id.action_login_to_register)
         }
     }
-
-
-
-
 
 
 }

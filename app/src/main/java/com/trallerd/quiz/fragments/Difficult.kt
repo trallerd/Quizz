@@ -59,8 +59,8 @@ class Difficult : Fragment() , View.OnClickListener {
                 load.show()
                 gameAdapter.startRandom {game->
                     if (game.status== "success"){
-                        load.dismiss()
                         Controller.game = game.data!!.game
+                        load.dismiss()
                         navController!!.navigate(R.id.action_difficult_to_game)
                     }
                 }
