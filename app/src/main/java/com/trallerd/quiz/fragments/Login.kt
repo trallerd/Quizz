@@ -21,9 +21,10 @@ import com.trallerd.quiz.MainActivity
 import com.trallerd.quiz.R
 import com.trallerd.quiz.controller.UsersController
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
 
-class Login : Fragment() , View.OnClickListener {
+class Login : Fragment() {
     lateinit var userController : UsersController
     var navController : NavController? = null
 
@@ -55,61 +56,48 @@ class Login : Fragment() , View.OnClickListener {
         return view
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-
         navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.btnLogin).setOnClickListener(this)
-        view.findViewById<Button>(R.id.btnRegisterLogin).setOnClickListener(this)
+        view.btnLogin.setOnClickListener { login() }
+        view.btnRegisterLogin.setOnClickListener { navController!!.navigate(R.id.action_login_to_register) }
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun onClick(v : View?) {
+    private fun login() {
         val build : AlertDialog.Builder = AlertDialog.Builder(activity)
         build.setView(R.layout.activity_loading)
         build.setCancelable(false)
-        when (v!!.id) {
-            R.id.btnLogin -> {
-                if (!TextUtils.isEmpty(emailLogin.text.toString())) {
-                    if (!TextUtils.isEmpty(passwordLogin.text.toString())) {
-                        val load : AlertDialog = build.create()
-                        load.show()
-                        userController.login(
-                            emailLogin.text.toString() ,
-                            passwordLogin.text.toString()
-                        ) { statusAPI ->
-                            if (statusAPI == "success") {
-                                saveData()
-                                load.dismiss()
-                                val intent = Intent(this.context , MainActivity::class.java)
-                                startActivity(intent)
-                            } else {
-                                load.dismiss()
-                                Toast.makeText(
-                                    this.context ,
-                                    R.string.invalid_user ,
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
-                        }
+        if (!TextUtils.isEmpty(emailLogin.text.toString())) {
+            if (!TextUtils.isEmpty(passwordLogin.text.toString())) {
+                val load : AlertDialog = build.create()
+                load.show()
+                userController.login(
+                    emailLogin.text.toString() ,
+                    passwordLogin.text.toString()
+                ) { statusAPI ->
+                    if (statusAPI == "success") {
+                        saveData()
+                        load.dismiss()
+                        val intent = Intent(this.context , MainActivity::class.java)
+                        startActivity(intent)
                     } else {
-                        Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT)
-                            .show()
+                        load.dismiss()
+                        Toast.makeText(
+                            this.context ,
+                            R.string.invalid_user ,
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                } else {
-                    Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT).show()
                 }
-
+            } else {
+                Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT)
+                    .show()
             }
-            R.id.btnRegisterLogin -> navController!!.navigate(R.id.action_login_to_register)
+        } else {
+            Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun conectivity() : Boolean {
-        val connectivityManager =
-            context?.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager?
-        val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
     private fun saveData() {

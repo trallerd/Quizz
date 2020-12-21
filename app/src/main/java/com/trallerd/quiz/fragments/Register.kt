@@ -16,8 +16,9 @@ import androidx.navigation.Navigation
 import com.trallerd.quiz.R
 import com.trallerd.quiz.controller.UsersController
 import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_register.view.*
 
-class Register : Fragment() , View.OnClickListener {
+class Register : Fragment() {
     lateinit var userController : UsersController
     var navController : NavController? = null
     override fun onCreateView(
@@ -29,79 +30,75 @@ class Register : Fragment() , View.OnClickListener {
         return inflater.inflate(R.layout.fragment_register , container , false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.btnRegister).setOnClickListener(this)
-        view.findViewById<Button>(R.id.btnBackRegister).setOnClickListener(this)
+        view.btnRegister.setOnClickListener { register() }
+        view.btnBackRegister.setOnClickListener { activity?.onBackPressed() }
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun onClick(v : View?) {
-        val build: AlertDialog.Builder = AlertDialog.Builder(activity)
+    private fun register() {
+        val build : AlertDialog.Builder = AlertDialog.Builder(activity)
         build.setView(R.layout.activity_loading)
         build.setCancelable(false)
-        val load: AlertDialog = build.create()
-        when (v!!.id) {
-            R.id.btnRegister -> {
-                if (!TextUtils.isEmpty(R.id.nameRegister.toString())) {
-                    if (!TextUtils.isEmpty(R.id.emailRegister.toString())) {
-                        if (!TextUtils.isEmpty(R.id.passwordRegister.toString())) {
-                            if (!TextUtils.isEmpty(R.id.confirmPRegister.toString())) {
-                                if (passwordRegister.text.toString() == confirmPRegister.text.toString()) {
-                                    load.show()
+        val load : AlertDialog = build.create()
+        if (!TextUtils.isEmpty(R.id.nameRegister.toString())) {
+            if (!TextUtils.isEmpty(R.id.emailRegister.toString())) {
+                if (!TextUtils.isEmpty(R.id.passwordRegister.toString())) {
+                    if (!TextUtils.isEmpty(R.id.confirmPRegister.toString())) {
+                        if (passwordRegister.text.toString() == confirmPRegister.text.toString()) {
+                            load.show()
 
-                                    userController.insert(
-                                        nameRegister.text.toString() ,
-                                        emailRegister.text.toString() ,
-                                        passwordRegister.text.toString()
-                                    ) { statusAPI ->
-                                        if (statusAPI == "success") {
-                                            load.dismiss()
-                                            navController!!.navigate(R.id.action_register_to_login)
-                                        } else {
-                                            load.dismiss()
-                                            Toast.makeText(
-                                                this.context ,
-                                                statusAPI ,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
-                                    }
+                            userController.insert(
+                                nameRegister.text.toString() ,
+                                emailRegister.text.toString() ,
+                                passwordRegister.text.toString()
+                            ) { statusAPI ->
+                                if (statusAPI == "success") {
+                                    load.dismiss()
+                                    navController!!.navigate(R.id.action_register_to_login)
                                 } else {
+                                    load.dismiss()
                                     Toast.makeText(
                                         this.context ,
-                                        R.string.password_error ,
+                                        statusAPI ,
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
-
-                            } else {
-                                Toast.makeText(
-                                    this.context ,
-                                    R.string.fields_error ,
-                                    Toast.LENGTH_SHORT
-                                ).show()
                             }
                         } else {
                             Toast.makeText(
                                 this.context ,
-                                R.string.fields_error ,
+                                R.string.password_error ,
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
+
                     } else {
-                        Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(
+                            this.context ,
+                            R.string.fields_error ,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
-                    Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this.context ,
+                        R.string.fields_error ,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-
-
+            } else {
+                Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT)
+                    .show()
             }
-
-            R.id.btnBackRegister -> activity?.onBackPressed()
+        } else {
+            Toast.makeText(this.context , R.string.fields_error , Toast.LENGTH_SHORT).show()
         }
+
     }
+
+
 }

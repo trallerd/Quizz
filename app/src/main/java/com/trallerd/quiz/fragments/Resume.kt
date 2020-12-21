@@ -1,10 +1,13 @@
 package com.trallerd.quiz.fragments
 
+import android.annotation.SuppressLint
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -16,12 +19,14 @@ import com.trallerd.quiz.models.category.Category
 import com.trallerd.quiz.models.game.end.EndGame
 import com.trallerd.quiz.models.game.start.Game
 import kotlinx.android.synthetic.main.fragment_resume.*
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class Resume : Fragment() {
     private lateinit var gameController : GameController
     var navController : NavController? = null
 
-
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
             inflater : LayoutInflater , container : ViewGroup? ,
             savedInstanceState : Bundle?
@@ -36,6 +41,7 @@ class Resume : Fragment() {
         return view
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setView(view : View , load : AlertDialog) {
 
         gameController = GameController(view)
@@ -52,9 +58,13 @@ class Resume : Fragment() {
             valueDifficultResume.text = Controller.difficult
             valueCategoryResume.text = Controller.category.name
 
+            val zonedStart = ZonedDateTime.parse(Controller.endGame.startedAt)
+            val zonedEnd = ZonedDateTime.parse(Controller.endGame.finishedAt)
 
-            valueEndResume.text =  Controller.endGame.finishedAt
-            valueStarResume.text = Controller.endGame.startedAt
+            val formatDate = DateTimeFormatter.ofPattern("dd-MM-YYYY HH:mm:ss")
+
+            valueEndResume.text =  zonedEnd.format(formatDate)
+            valueStarResume.text = zonedStart.format(formatDate)
         }
     }
 
