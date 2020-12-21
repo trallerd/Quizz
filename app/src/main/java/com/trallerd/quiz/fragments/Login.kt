@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
@@ -15,19 +14,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.trallerd.quiz.MainActivity
 import com.trallerd.quiz.R
-import com.trallerd.quiz.adapters.UsersAdapter
+import com.trallerd.quiz.controller.UsersController
 import kotlinx.android.synthetic.main.fragment_login.*
-import java.net.InetAddress
 
 
 class Login : Fragment() , View.OnClickListener {
-    lateinit var userAdapter : UsersAdapter
+    lateinit var userController : UsersController
     var navController : NavController? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -37,7 +34,7 @@ class Login : Fragment() , View.OnClickListener {
             savedInstanceState : Bundle?
     ) : View? {
         val view = inflater.inflate(R.layout.fragment_login , container , false)
-        userAdapter = UsersAdapter()
+        userController = UsersController()
         val build : AlertDialog.Builder = AlertDialog.Builder(activity)
         build.setView(R.layout.activity_loading)
         build.setCancelable(false)
@@ -45,7 +42,7 @@ class Login : Fragment() , View.OnClickListener {
         if (pref?.getString("email" , null) != null) {
             val load : AlertDialog = build.create()
             load.show()
-            userAdapter.login(
+            userController.login(
                 pref.getString("email" , "").toString() ,
                 pref.getString("password" , "").toString()
             ) {
@@ -77,7 +74,7 @@ class Login : Fragment() , View.OnClickListener {
                     if (!TextUtils.isEmpty(passwordLogin.text.toString())) {
                         val load : AlertDialog = build.create()
                         load.show()
-                        userAdapter.login(
+                        userController.login(
                             emailLogin.text.toString() ,
                             passwordLogin.text.toString()
                         ) { statusAPI ->

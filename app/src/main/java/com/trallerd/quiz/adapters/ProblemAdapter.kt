@@ -11,7 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.trallerd.quiz.Controller
+import com.trallerd.quiz.controller.GameController
 import com.trallerd.quiz.R
+import com.trallerd.quiz.controller.ProblemController
 import com.trallerd.quiz.dao.ProblemDAO
 import com.trallerd.quiz.models.problem.AnswerProblem
 import com.trallerd.quiz.models.problem.ProblemResponse
@@ -25,35 +27,12 @@ class ProblemAdapter(answers : List<AnswerProblem> , view : View) :
         .setView(R.layout.activity_loading)
         .setCancelable(false)
     val load : AlertDialog = build.create()
-    private val problemDAO = ProblemDAO()
-    private val gameAdapter = GameAdapter(view)
+    val problemController = ProblemController()
+    private val gameAdapter = GameController(view)
     private var listAnswers = listOf<AnswerProblem>()
-
 
     init {
         listAnswers = answers
-    }
-
-
-    fun getNext(done : (ProblemResponse) -> Unit) {
-        val token = Controller.user.token!!
-        problemDAO.getNext(token) { problemAPI ->
-            done(problemAPI)
-        }
-    }
-
-    fun getCurrent(done : (ProblemResponse) -> Unit) {
-        val token = Controller.user.token!!
-        problemDAO.getCurrent(token) { problemAPI ->
-            done(problemAPI)
-        }
-    }
-
-    fun answer(answer : Int , done : (answer : Int) -> Unit) {
-        val token = Controller.user.token!!
-        problemDAO.answer(token , answer) { answerAPI ->
-            done(answerAPI.data!!.answer.correctAnswer.order)
-        }
     }
 
     override fun getItemViewType(position : Int) : Int {
@@ -80,7 +59,7 @@ class ProblemAdapter(answers : List<AnswerProblem> , view : View) :
             itemView.txtAnswers.text = answer.description
             itemView.setOnClickListener {
                 load.show()
-                answer(answer.order) { answerAPI ->
+                problemController.answer(answer.order) { answerAPI ->
                     load.dismiss()
                     if (answer.order == answerAPI) {
                         itemView.backgroundAnswer.setBackgroundColor(Color.parseColor("#008000"))

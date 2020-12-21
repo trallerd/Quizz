@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.R
 import com.trallerd.quiz.adapters.ProblemAdapter
+import com.trallerd.quiz.controller.ProblemController
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.android.synthetic.main.fragment_game.view.*
 
 class Game : Fragment() {
     private lateinit var problemAdapter : ProblemAdapter
+    val problemController = ProblemController()
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
             inflater : LayoutInflater , container : ViewGroup? ,
@@ -38,7 +40,7 @@ class Game : Fragment() {
         problemAdapter = ProblemAdapter(listOf(),view)
         load.show()
         if (!Controller.problem) {
-            problemAdapter.getNext { problemAPI ->
+            problemController.getNext { problemAPI ->
                 Controller.difficult = problemAPI.data!!.problem.difficulty
                 Controller.category = problemAPI.data!!.problem.category
                 Controller.question = problemAPI.data!!.problem.question
@@ -57,7 +59,7 @@ class Game : Fragment() {
                 load.dismiss()
             }
         } else {
-            problemAdapter.getCurrent { problemAPI ->
+            problemController.getCurrent { problemAPI ->
                 openQuestion(view)
                 Controller.difficult = problemAPI.data!!.problem.difficulty
                 Controller.category = problemAPI.data!!.problem.category

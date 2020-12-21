@@ -1,11 +1,11 @@
-package com.trallerd.quiz.adapters
+package com.trallerd.quiz.controller
 
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.dao.UsersDAO
 import com.trallerd.quiz.models.login.Login
 import com.trallerd.quiz.models.user.User
 
-class UsersAdapter {
+class UsersController {
     var userDao = UsersDAO()
 
     fun insert(nome: String, email: String, password: String, done: (status: String)->Unit){

@@ -14,18 +14,18 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.trallerd.quiz.R
-import com.trallerd.quiz.adapters.UsersAdapter
+import com.trallerd.quiz.controller.UsersController
 import kotlinx.android.synthetic.main.fragment_register.*
 
 class Register : Fragment() , View.OnClickListener {
-    lateinit var userAdapter : UsersAdapter
+    lateinit var userController : UsersController
     var navController : NavController? = null
     override fun onCreateView(
             inflater : LayoutInflater , container : ViewGroup? ,
             savedInstanceState : Bundle?
     ) : View? {
 
-        userAdapter = UsersAdapter()
+        userController = UsersController()
         return inflater.inflate(R.layout.fragment_register , container , false)
     }
 
@@ -51,7 +51,7 @@ class Register : Fragment() , View.OnClickListener {
                                 if (passwordRegister.text.toString() == confirmPRegister.text.toString()) {
                                     load.show()
 
-                                    userAdapter.insert(
+                                    userController.insert(
                                         nameRegister.text.toString() ,
                                         emailRegister.text.toString() ,
                                         passwordRegister.text.toString()

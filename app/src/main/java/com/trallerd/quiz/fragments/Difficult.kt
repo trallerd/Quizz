@@ -14,11 +14,11 @@ import androidx.navigation.Navigation
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.LoginRegisterActivity
 import com.trallerd.quiz.R
-import com.trallerd.quiz.adapters.GameAdapter
+import com.trallerd.quiz.controller.GameController
 import com.trallerd.quiz.models.user.User
 
 class Difficult : Fragment() , View.OnClickListener {
-    lateinit var gameAdapter : GameAdapter
+    lateinit var gameController : GameController
     var navController : NavController? = null
     lateinit var build : AlertDialog.Builder
 
@@ -31,7 +31,7 @@ class Difficult : Fragment() , View.OnClickListener {
             .setView(R.layout.activity_loading)
             .setCancelable(false)
 
-        gameAdapter = GameAdapter(view)
+        gameController = GameController(view)
         return view
     }
 
@@ -62,7 +62,7 @@ class Difficult : Fragment() , View.OnClickListener {
             R.id.btnRandom -> {
                 val load : AlertDialog = build.create()
                 load.show()
-                gameAdapter.startRandom {game->
+                gameController.startRandom { game->
                     if (game.status== "success"){
                         Controller.game = game.data!!.game
                         load.dismiss()

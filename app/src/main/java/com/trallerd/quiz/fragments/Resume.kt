@@ -11,14 +11,14 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.R
-import com.trallerd.quiz.adapters.GameAdapter
+import com.trallerd.quiz.controller.GameController
 import com.trallerd.quiz.models.category.Category
 import com.trallerd.quiz.models.game.end.EndGame
 import com.trallerd.quiz.models.game.start.Game
 import kotlinx.android.synthetic.main.fragment_resume.*
 
 class Resume : Fragment() {
-    private lateinit var gameAdapter : GameAdapter
+    private lateinit var gameController : GameController
     var navController : NavController? = null
 
 
@@ -38,9 +38,9 @@ class Resume : Fragment() {
 
     private fun setView(view : View , load : AlertDialog) {
 
-        gameAdapter = GameAdapter(view)
+        gameController = GameController(view)
         load.show()
-        gameAdapter.endGame { endGame ->
+        gameController.endGame { endGame ->
             load.dismiss()
             Controller.endGame = endGame.data!!.game
             if (Controller.endGame.score > 0) {
