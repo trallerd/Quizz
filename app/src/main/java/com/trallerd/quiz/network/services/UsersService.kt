@@ -2,8 +2,8 @@ package com.trallerd.quiz.network.services
 
 import com.trallerd.quiz.models.login.Login
 import com.trallerd.quiz.models.login.LoginResponse
-import com.trallerd.quiz.models.users.User
-import com.trallerd.quiz.models.users.UsersResponse
+import com.trallerd.quiz.models.user.User
+import com.trallerd.quiz.models.user.UsersResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers

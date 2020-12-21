@@ -1,6 +1,6 @@
 package com.trallerd.quiz.models.ranking
 
-class Rankings(
+class RankingDatabase(
         var ranking : List<Ranking> ,
 ) {
 }

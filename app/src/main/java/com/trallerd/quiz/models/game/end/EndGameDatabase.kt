@@ -1,6 +1,6 @@
 package com.trallerd.quiz.models.game.end
 
-class EndGames(
+class EndGameDatabase(
         var game : EndGame
 ) {
 

@@ -1,6 +1,6 @@
-package com.trallerd.quiz.models.problems
+package com.trallerd.quiz.models.problem
 
-import com.trallerd.quiz.models.categories.Category
+import com.trallerd.quiz.models.category.Category
 
 class Problem(
         var question : String ,

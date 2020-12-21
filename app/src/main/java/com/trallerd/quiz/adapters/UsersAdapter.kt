@@ -3,7 +3,7 @@ package com.trallerd.quiz.adapters
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.dao.UsersDAO
 import com.trallerd.quiz.models.login.Login
-import com.trallerd.quiz.models.users.User
+import com.trallerd.quiz.models.user.User
 
 class UsersAdapter {
     var userDao = UsersDAO()

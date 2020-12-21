@@ -1,7 +1,7 @@
 package com.trallerd.quiz.dao
 
 import android.util.Log
-import com.trallerd.quiz.models.categories.CategoriesResponse
+import com.trallerd.quiz.models.category.CategoriesResponse
 import com.trallerd.quiz.network.services.CategoriesService
 import retrofit2.Call
 import retrofit2.Callback

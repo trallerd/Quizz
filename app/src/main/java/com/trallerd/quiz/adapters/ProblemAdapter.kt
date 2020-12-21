@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.R
 import com.trallerd.quiz.dao.ProblemDAO
-import com.trallerd.quiz.models.problems.AnswerProblem
-import com.trallerd.quiz.models.problems.ProblemResponse
+import com.trallerd.quiz.models.problem.AnswerProblem
+import com.trallerd.quiz.models.problem.ProblemResponse
 import kotlinx.android.synthetic.main.recyclerview_answers.view.*
 
 

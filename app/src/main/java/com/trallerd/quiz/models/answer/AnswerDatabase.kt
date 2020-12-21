@@ -1,6 +1,6 @@
 package com.trallerd.quiz.models.answer
 
-class Answers(
+class AnswerDatabase(
         var answer : Answer
 ) {
 }

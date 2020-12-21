@@ -1,12 +1,11 @@
 package com.trallerd.quiz
 
 import android.app.Application
-import com.trallerd.quiz.models.answer.Answer
-import com.trallerd.quiz.models.categories.Category
+import com.trallerd.quiz.models.category.Category
 import com.trallerd.quiz.models.game.end.EndGame
 import com.trallerd.quiz.models.game.start.Game
-import com.trallerd.quiz.models.problems.AnswerProblem
-import com.trallerd.quiz.models.users.User
+import com.trallerd.quiz.models.problem.AnswerProblem
+import com.trallerd.quiz.models.user.User
 
 class Controller: Application() {
     companion object{

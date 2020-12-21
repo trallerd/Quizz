@@ -1,4 +1,4 @@
-package com.trallerd.quiz.models.users
+package com.trallerd.quiz.models.user
 
 class User(
     var name: String,

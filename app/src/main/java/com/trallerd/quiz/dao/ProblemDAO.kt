@@ -1,9 +1,8 @@
 package com.trallerd.quiz.dao
 
 import android.util.Log
-import com.trallerd.quiz.Controller
 import com.trallerd.quiz.models.answer.AnswerResponde
-import com.trallerd.quiz.models.problems.ProblemResponse
+import com.trallerd.quiz.models.problem.ProblemResponse
 import com.trallerd.quiz.network.services.ProblemsService
 import retrofit2.Call
 import retrofit2.Callback

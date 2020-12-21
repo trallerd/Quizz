@@ -1,4 +1,4 @@
-package com.trallerd.quiz.models.categories
+package com.trallerd.quiz.models.category
 
 class Category(
         var id : Long ,

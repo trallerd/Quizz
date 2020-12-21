@@ -13,10 +13,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.LoginRegisterActivity
-import com.trallerd.quiz.MainActivity
 import com.trallerd.quiz.R
 import com.trallerd.quiz.adapters.GameAdapter
-import com.trallerd.quiz.models.users.User
+import com.trallerd.quiz.models.user.User
 
 class Difficult : Fragment() , View.OnClickListener {
     lateinit var gameAdapter : GameAdapter

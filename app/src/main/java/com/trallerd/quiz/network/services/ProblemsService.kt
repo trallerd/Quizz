@@ -1,7 +1,7 @@
 package com.trallerd.quiz.network.services
 
 import com.trallerd.quiz.models.answer.AnswerResponde
-import com.trallerd.quiz.models.problems.ProblemResponse
+import com.trallerd.quiz.models.problem.ProblemResponse
 import retrofit2.Call
 import retrofit2.http.*
 

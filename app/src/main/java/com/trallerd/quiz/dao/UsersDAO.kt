@@ -3,8 +3,8 @@ package com.trallerd.quiz.dao
 import android.util.Log
 import com.trallerd.quiz.models.login.Login
 import com.trallerd.quiz.models.login.LoginResponse
-import com.trallerd.quiz.models.users.User
-import com.trallerd.quiz.models.users.UsersResponse
+import com.trallerd.quiz.models.user.User
+import com.trallerd.quiz.models.user.UsersResponse
 import com.trallerd.quiz.network.services.UsersService
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,4 +1,4 @@
-package com.trallerd.quiz.models.problems
+package com.trallerd.quiz.models.problem
 
 class AnswerProblem(
         var order: Int,

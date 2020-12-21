@@ -9,10 +9,9 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.trallerd.quiz.Controller
-import com.trallerd.quiz.MainActivity
 import com.trallerd.quiz.R
 import com.trallerd.quiz.dao.CategoriesDAO
-import com.trallerd.quiz.models.categories.Category
+import com.trallerd.quiz.models.category.Category
 import kotlinx.android.synthetic.main.recyclerview_category.view.*
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

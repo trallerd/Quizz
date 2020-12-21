@@ -1,6 +1,6 @@
 package com.trallerd.quiz.models.game.start
 
-class Games(
+class GameDatabase(
         var game : Game
 ) {
 }
