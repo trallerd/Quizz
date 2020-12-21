@@ -49,12 +49,11 @@ class Difficult : Fragment() {
     private fun logout() {
         val pref = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
         val edt = pref?.edit()
-        edt?.putString("email", null)
-        edt?.putString("password", null)
+        edt?.putString("login", "false")
+        edt?.putString("token", " ")
         edt?.commit()
 
-        Controller.user = User("","","")
-        Controller.user.token = ""
+        Controller.token = ""
 
         val intent = Intent(this.context, LoginRegisterActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

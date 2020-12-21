@@ -9,7 +9,7 @@ import com.trallerd.quiz.models.user.User
 
 class Controller: Application() {
     companion object{
-        var user = User("","","")
+        var token = " "
         var difficult = ""
         var category = Category(0,"")
         var game = Game("","", "",0)

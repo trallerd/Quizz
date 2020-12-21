@@ -12,7 +12,7 @@ class GameController(view : View) {
 
     fun start(done : (game : GameResponse) -> Unit) {
         Controller.random = false
-        val token = Controller.user.token!!
+        val token = Controller.token!!
         val difficulty = Controller.difficult
         val category = Controller.category.id
         gameDAO.start(difficulty , category , token) { gameAPI ->
@@ -22,7 +22,7 @@ class GameController(view : View) {
 
     fun startRandom(done : (game : GameResponse) -> Unit) {
         Controller.random = true
-        val token = Controller.user.token!!
+        val token = Controller.token!!
         gameDAO.startRandom(token) { gameAPI ->
                 done(gameAPI)
         }
@@ -30,7 +30,7 @@ class GameController(view : View) {
     }
 
     fun endGame(done : (game : EndGameResponse) -> Unit) {
-        val token = Controller.user.token!!.toString()
+        val token = Controller.token!!.toString()
         gameDAO.endGame(token) { gameAPI ->
             done(gameAPI)
         }

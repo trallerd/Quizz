@@ -2,21 +2,19 @@ package com.trallerd.quiz.fragments
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.trallerd.quiz.Controller
 import com.trallerd.quiz.MainActivity
 import com.trallerd.quiz.R
 import com.trallerd.quiz.controller.UsersController
@@ -40,18 +38,14 @@ class Login : Fragment() {
         build.setView(R.layout.activity_loading)
         build.setCancelable(false)
         val pref = activity?.getSharedPreferences("user" , Context.MODE_PRIVATE)
-        if (pref?.getString("email" , null) != null) {
+        if (pref?.getString("login" , "false") == "true") {
+           val token = pref.getString("token" , " ")
+            Controller.token = token!!
             val load : AlertDialog = build.create()
             load.show()
-            userController.login(
-                pref.getString("email" , "").toString() ,
-                pref.getString("password" , "").toString()
-            ) {
-                load.dismiss()
-                val intent = Intent(this.context , MainActivity::class.java)
+            val intent = Intent(this.context , MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
-            }
         }
         return view
     }
@@ -103,8 +97,8 @@ class Login : Fragment() {
     private fun saveData() {
         val pref = activity?.getSharedPreferences("user" , Context.MODE_PRIVATE)
         val edt = pref?.edit()
-        edt?.putString("email" , emailLogin.text.toString())
-        edt?.putString("password" , passwordLogin.text.toString())
+        edt?.putString("login" , "true")
+        edt?.putString("token" , Controller.token)
         edt?.apply()
     }
 

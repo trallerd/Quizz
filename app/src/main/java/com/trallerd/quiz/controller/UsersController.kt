@@ -23,7 +23,7 @@ class UsersController {
     fun login(email : String, password : String, done : (status: String) -> Unit){
         val login = Login(email, password)
         userDao.login(login){LoginAPI->
-            Controller.user = LoginAPI.data!!.user
+            Controller.token = LoginAPI.data!!.user.token!!
             done(LoginAPI.status)
         }
     }
