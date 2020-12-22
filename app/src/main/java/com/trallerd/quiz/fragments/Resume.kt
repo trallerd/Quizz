@@ -18,6 +18,7 @@ import com.trallerd.quiz.controller.GameController
 import com.trallerd.quiz.models.category.Category
 import com.trallerd.quiz.models.game.end.EndGame
 import com.trallerd.quiz.models.game.start.Game
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_resume.*
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -48,18 +49,19 @@ class Resume : Fragment() {
         load.show()
         gameController.endGame { endGame ->
             load.dismiss()
-            Controller.endGame = endGame.data!!.game
-            if (Controller.endGame.score > 0) {
+            Controller.endGame = true
+            val game = endGame
+            if (game.data!!.game.score> 0) {
                 valueScoreResume.setTextColor(Color.parseColor("#008000"))
             } else {
                 valueScoreResume.setTextColor(Color.parseColor("#ff0000"))
             }
-            valueScoreResume.text = Controller.endGame.score.toString()
+            valueScoreResume.text = game.data!!.game.score.toString()
             valueDifficultResume.text = Controller.difficult
             valueCategoryResume.text = Controller.category.name
 
-            val zonedStart = ZonedDateTime.parse(Controller.endGame.startedAt)
-            val zonedEnd = ZonedDateTime.parse(Controller.endGame.finishedAt)
+            val zonedStart = ZonedDateTime.parse(game.data!!.game.startedAt)
+            val zonedEnd = ZonedDateTime.parse(game.data!!.game.finishedAt)
 
             val formatDate = DateTimeFormatter.ofPattern("dd-MM-YYYY HH:mm:ss")
 
@@ -75,7 +77,7 @@ class Resume : Fragment() {
             Controller.difficult = ""
             Controller.category = Category(0 , "")
             Controller.game = Game("" , "" , "" , 0)
-            Controller.endGame = EndGame("" , "" , "" , 0)
+            Controller.endGame = true
             Controller.question = ""
             Controller.problem = false
 

@@ -27,17 +27,17 @@ class ProblemDAO {
             ) {
                 if (response.body()!=null){
                     if (response.body()!!.status=="success"){
-                        Log.i("Failure", response.body()!!.toString()+"getNext")
                         val resp = response.body()!!
                         finished(resp)
-
+                    }else{
+                        val resp = ProblemResponse("error",null)
+                        finished(resp)
                     }
 
                 }
             }
 
             override fun onFailure(call : Call<ProblemResponse> , t : Throwable) {
-                Log.i("Failure" , t.message.toString()+"getNext")
             }
         })
 
@@ -50,16 +50,17 @@ class ProblemDAO {
             ) {
                 if (response.body()!=null){
                     if (response.body()!!.status=="success"){
-                        Log.i("Failure" , response.body()!!.toString()+"getCurrent")
                         finished(response.body()!!)
 
+                    }else{
+                        val resp = ProblemResponse("error",null)
+                        finished(resp)
                     }
 
                 }
             }
 
             override fun onFailure(call : Call<ProblemResponse> , t : Throwable) {
-                Log.i("Failure" , t.message.toString()+"getNext")
             }
         })
 
@@ -72,16 +73,17 @@ class ProblemDAO {
             ) {
                 if (response.body()!=null){
                     if (response.body()!!.status=="success"){
-                        Log.i("Failure" , response.body()!!.toString()+"answerCorrect")
                         finished(response.body()!!)
 
+                    }else{
+                        val resp = AnswerResponde("error",null)
+                        finished(resp)
                     }
 
                 }
             }
 
             override fun onFailure(call : Call<AnswerResponde> , t : Throwable) {
-                Log.i("Failure" , t.message.toString()+"answerCorrect")
             }
         })
 

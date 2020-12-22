@@ -1,5 +1,6 @@
 package com.trallerd.quiz.controller
 
+import android.util.Log
 import com.trallerd.quiz.Controller
 import com.trallerd.quiz.dao.UsersDAO
 import com.trallerd.quiz.models.login.Login
@@ -23,8 +24,13 @@ class UsersController {
     fun login(email : String, password : String, done : (status: String) -> Unit){
         val login = Login(email, password)
         userDao.login(login){LoginAPI->
-            Controller.token = LoginAPI.data!!.user.token!!
-            done(LoginAPI.status)
+            if (LoginAPI.status=="success"){
+                Controller.token = LoginAPI.data!!.user.token!!
+                done(LoginAPI.status)
+            }else{
+                done(LoginAPI.status)
+            }
+
         }
     }
 }

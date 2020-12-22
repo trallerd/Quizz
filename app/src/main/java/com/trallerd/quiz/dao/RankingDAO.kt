@@ -23,11 +23,13 @@ class RankingDAO {
                 if (response.body() != null) {
                     val ranking = response.body()!!
                     finished(ranking)
+                }else{
+                    val ranking = RankingResponse("error",null)
+                    finished(ranking)
                 }
             }
 
             override fun onFailure(call : Call<RankingResponse> , t : Throwable) {
-                Log.i("Failure" , t.message.toString())
             }
 
         })

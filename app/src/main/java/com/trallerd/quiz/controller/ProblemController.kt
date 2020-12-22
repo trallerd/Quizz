@@ -24,7 +24,12 @@ class ProblemController {
     fun answer(answer : Int , done : (answer : Int) -> Unit) {
         val token = Controller.token!!
         problemDAO.answer(token , answer) { answerAPI ->
-            done(answerAPI.data!!.answer.correctAnswer.order)
+            if (answerAPI.status=="success"){
+                done(answerAPI.data!!.answer.correctAnswer.order)
+
+            }else{
+                done(0)
+            }
         }
     }
 

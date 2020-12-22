@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,6 +72,7 @@ class Login : Fragment() {
                     emailLogin.text.toString() ,
                     passwordLogin.text.toString()
                 ) { statusAPI ->
+
                     if (statusAPI == "success") {
                         saveData()
                         load.dismiss()

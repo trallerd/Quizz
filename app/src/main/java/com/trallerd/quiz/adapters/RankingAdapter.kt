@@ -1,11 +1,13 @@
 package com.trallerd.quiz.adapters
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.trallerd.quiz.R
@@ -13,6 +15,7 @@ import com.trallerd.quiz.dao.RankingDAO
 import com.trallerd.quiz.models.ranking.Ranking
 import kotlinx.android.synthetic.main.recyclerview_ranking.view.*
 
+@SuppressLint("ShowToast")
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class RankingAdapter(view : View) : RecyclerView.Adapter<RankingAdapter.RankingHolder>() {
     private val rankingDAO = RankingDAO()
@@ -25,9 +28,15 @@ class RankingAdapter(view : View) : RecyclerView.Adapter<RankingAdapter.RankingH
     init {
         load.show()
         rankingDAO.getRanking { rankingAPI->
-            rankings = rankingAPI.data!!.ranking
-            notifyDataSetChanged()
-            load.dismiss()
+            if (rankingAPI.status=="success"){
+                rankings = rankingAPI.data!!.ranking
+                notifyDataSetChanged()
+                load.dismiss()
+            }else{
+                load.dismiss()
+                Toast.makeText(view.context,R.string.conectivity_error,Toast.LENGTH_LONG)
+            }
+
         }
     }
 

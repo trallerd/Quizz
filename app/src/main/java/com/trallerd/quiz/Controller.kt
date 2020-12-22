@@ -13,7 +13,7 @@ class Controller: Application() {
         var difficult = ""
         var category = Category(0,"")
         var game = Game("","", "",0)
-        var endGame = EndGame("","","",0)
+        var endGame = false
         var question = ""
         var problem = false
         var answers = listOf<AnswerProblem>()
